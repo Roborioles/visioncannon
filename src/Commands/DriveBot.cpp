@@ -22,27 +22,28 @@ DriveBot::DriveBot() {
 
 // Called just before this Command runs the first time
 void DriveBot::Initialize() {
+
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveBot::Execute() {
-	Joystick* stick = Robot::oi->getGamePad();
+
 	
-	if (Robot::teleop) {
+	if (Robot::teleop && !Robot::aiming) {
 
 		if(Robot::mover->speedSwitch->Get()){
 
-			Robot::mover->rightMotor0->Set(stick->GetThrottle()*-0.75);
-			Robot::mover->rightMotor1->Set(stick->GetThrottle()*-0.75);
+			Robot::mover->rightMotor0->Set(Robot::oi->getGamePad()->GetThrottle()*-0.75);
+			Robot::mover->rightMotor1->Set(Robot::oi->getGamePad()->GetThrottle()*-0.75);
 
-			Robot::mover->leftMotor2->Set(stick->GetY()*0.75);
-			Robot::mover->leftMotor3->Set(stick->GetY()*0.75);
+			Robot::mover->leftMotor2->Set(Robot::oi->getGamePad()->GetY()*0.75);
+			Robot::mover->leftMotor3->Set(Robot::oi->getGamePad()->GetY()*0.75);
 		}else{
-			Robot::mover->rightMotor0->Set(stick->GetThrottle()*-0.25);
-			Robot::mover->rightMotor1->Set(stick->GetThrottle()*-0.25);
+			Robot::mover->rightMotor0->Set(Robot::oi->getGamePad()->GetThrottle()*-0.25);
+			Robot::mover->rightMotor1->Set(Robot::oi->getGamePad()->GetThrottle()*-0.25);
 
-			Robot::mover->leftMotor2->Set(stick->GetY()*0.25);
-			Robot::mover->leftMotor3->Set(stick->GetY()*0.25);
+			Robot::mover->leftMotor2->Set(Robot::oi->getGamePad()->GetY()*0.25);
+			Robot::mover->leftMotor3->Set(Robot::oi->getGamePad()->GetY()*0.25);
 		}
 		printf("camera voltage = %f\n", Robot::mover->camera->GetVoltage());
 	}

@@ -9,6 +9,7 @@ class aimTarget: public Command
 {
 public:
 	aimTarget();
+	bool gotIt;
 	void Initialize();
 	void Execute();
 	bool IsFinished();
